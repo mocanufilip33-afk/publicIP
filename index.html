@@ -1,54 +1,40 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il Mio Sito</title>
-
-    <style>
-        body{
-            background:#111;
-            color:white;
-            font-family:Arial;
-            text-align:center;
-            padding-top:100px;
-        }
-
-        h1{
-            color:#00ff88;
-            font-size:50px;
-        }
-
-        p{
-            font-size:22px;
-        }
-
-        button{
-            padding:15px 30px;
-            font-size:20px;
-            border:none;
-            border-radius:10px;
-            background:#00ff88;
-            cursor:pointer;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Il tuo IP</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 100px;
+      background: #111;
+      color: white;
+    }
+    h1 {
+      color: #00ff88;
+    }
+    #ip {
+      font-size: 40px;
+      margin-top: 20px;
+    }
+  </style>
 </head>
-
 <body>
 
-    <h1>🌍 Il mio sito è online</h1>
+  <h1>🌍 Il tuo indirizzo IP pubblico è:</h1>
+  <div id="ip">Caricamento...</div>
 
-    <p>Creato da Linux Mint e pubblicato su GitHub Pages.</p>
-
-    <button onclick="saluto()">
-        Cliccami
-    </button>
-
-    <script>
-        function saluto(){
-            alert("Benvenuto nel mio sito online!");
-        }
-    </script>
+  <script>
+    fetch("https://api.ipify.org?format=json")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("ip").innerText = data.ip;
+      })
+      .catch(() => {
+        document.getElementById("ip").innerText = "Errore nel caricamento";
+      });
+  </script>
 
 </body>
 </html>
